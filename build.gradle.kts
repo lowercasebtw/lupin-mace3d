@@ -35,9 +35,9 @@ class Dependencies {
 }
 
 class LoaderData {
-    val loader = loom.platform.get().name.lowercase()
-    val isFabric = loader == "fabric"
-    val isNeoForge = loader == "neoforge"
+    val name = loom.platform.get().name.lowercase()
+    val isFabric = name == "fabric"
+    val isNeoForge = name == "neoforge"
 }
 
 val mod = ModData()
@@ -46,7 +46,7 @@ val loader = LoaderData()
 
 group = mod.group
 base {
-    archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}+${loader.loader}")
+    archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}+${loader.name}")
 }
 
 java {
@@ -128,7 +128,7 @@ dependencies {
     })
 
     include(implementation("com.moulberry:mixinconstraints:${deps.mixinConstraintsVersion}")!!)!!
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-${loader.loader}:${deps.mixinSquaredVersion}")!!)!!)
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-${loader.name}:${deps.mixinSquaredVersion}")!!)!!)
     if (loader.isFabric) {
         modImplementation("net.fabricmc:fabric-loader:${deps.fabricLoaderVersion}")
         modImplementation(fabricApi.module("fabric-resource-loader-v0", deps.fabricApiVersion)) // NOTE: Required for the /resources/assets/ files to be loaded by the game
