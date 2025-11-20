@@ -47,7 +47,7 @@ val loader = LoaderData()
 version = mod.version
 group = mod.group
 base {
-    archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}")
+    archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}+${loader.loader}")
 }
 
 stonecutter {
