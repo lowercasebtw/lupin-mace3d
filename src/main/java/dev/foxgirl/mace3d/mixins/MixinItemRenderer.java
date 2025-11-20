@@ -30,16 +30,16 @@ public abstract class MixinItemRenderer {
     //? >=1.21.2 {
     private ModelManager modelManager;
     //?} else {
-    *//*private ItemModelShaper itemModelShaper;
-     *//*//?}
+    /^private ItemModelShaper itemModelShaper;
+     ^///?}
 
     @Unique
     private BakedModel mace3d$getBakedModelByResourceLocation(ModelResourceLocation modelResourceLocation) {
         //? >=1.21.2 {
         return this.modelManager.getModel(modelResourceLocation);
         //?} else {
-        *//*return itemModelShaper.getModelManager().getModel(modelResourceLocation);
-     *//*//?}
+        /^return itemModelShaper.getModelManager().getModel(modelResourceLocation);
+     ^///?}
     }
 
     @Unique
@@ -55,8 +55,8 @@ public abstract class MixinItemRenderer {
         //? >=1.21.2 {
         method = "renderSimpleItemModel",
         //?} else {
-        *//*method = "render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
-     *//*//?}
+        /^method = "render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
+     ^///?}
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z",

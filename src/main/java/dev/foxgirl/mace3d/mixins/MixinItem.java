@@ -1,13 +1,13 @@
 package dev.foxgirl.mace3d.mixins;
 
 import org.spongepowered.asm.mixin.Mixin;
+import net.minecraft.world.item.Item;
 
 //? >=1.21.4 {
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.foxgirl.mace3d.Mace3D;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.injection.At;
 //?}
 

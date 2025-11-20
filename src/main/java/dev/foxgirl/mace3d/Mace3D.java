@@ -1,11 +1,11 @@
 package dev.foxgirl.mace3d;
 
 //? fabric {
-/*import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
+import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ClientModInitializer;
-*///?} else neoforge {
-import net.neoforged.fml.common.Mod;
- //?}
+//?} else neoforge {
+/*import net.neoforged.fml.common.Mod;
+ *///?}
 
 //? <=1.21.3 {
 /*import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -15,12 +15,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 
 //? neoforge
-@Mod(Mace3D.MOD_ID)
+/*@Mod(Mace3D.MOD_ID)*/
 //? fabric
-/*@Entrypoint*/
+@Entrypoint
 public final class Mace3D
     //? fabric
-    /*implements ClientModInitializer*/
+    implements ClientModInitializer
 {
     public static final String MOD_ID = "@MODID@";
 
@@ -39,8 +39,8 @@ public final class Mace3D
     }
 
     //? fabric {
-    /*@Override
+    @Override
     public void onInitializeClient() {
     }
-    *///?}
+    //?}
 }
