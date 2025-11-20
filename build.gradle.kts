@@ -130,47 +130,57 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-tasks.processResources {
-    val props = buildMap {
-        put("id", mod.id)
-        put("name", mod.name)
-        put("version", mod.version)
-        put("description", mod.description)
-        put("source", mod.source)
-        put("issues", mod.issues)
-        put("license", mod.license)
-        put("modrinth", mod.modrinth)
-        put("curseforge", mod.curseforge)
+tasks {
+    processResources {
+        val props = buildMap {
+            put("id", mod.id)
+            put("name", mod.name)
+            put("version", mod.version)
+            put("description", mod.description)
+            put("source", mod.source)
+            put("issues", mod.issues)
+            put("license", mod.license)
+            put("modrinth", mod.modrinth)
+            put("curseforge", mod.curseforge)
+            if (loader.isFabric) {
+                put("fabric_loader_version", deps.fabricLoaderVersion)
+            } else if (loader.isNeoForge) {
+                put("neoforge_version", deps.neoForgeVersion)
+            }
+
+            val mcVersionRange = if (mod.mcVersionRange.contains(' ')) {
+                val parts = mod.mcVersionRange.trim().split(' ')
+                ">=" + parts.first() + ' ' + "<=" + parts.last()
+            } else {
+                mod.mcVersionRange
+            }
+
+            put("minecraft_version_range", mcVersionRange)
+        }
+
+        props.forEach(inputs::property)
+        filesMatching("**/lang/en_us.json") { // Defaults description to English translation
+            expand(props)
+            filteringCharset = "UTF-8"
+        }
+
         if (loader.isFabric) {
-            put("fabric_loader_version", deps.fabricLoaderVersion)
-        } else if (loader.isNeoForge) {
-            put("neoforge_version", deps.neoForgeVersion)
+            filesMatching("fabric.mod.json") { expand(props) }
+            exclude(listOf("META-INF/neoforge.mods.toml"))
         }
 
-        val mcVersionRange = if (mod.mcVersionRange.contains(' ')) {
-            val parts = mod.mcVersionRange.trim().split(' ')
-            ">=" + parts.first() + ' ' + "<=" + parts.last()
-        } else {
-            mod.mcVersionRange
+        if (loader.isNeoForge) {
+            filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
+            exclude(listOf("fabric.mod.json"))
         }
-
-        put("minecraft_version_range", mcVersionRange)
     }
 
-    props.forEach(inputs::property)
-    filesMatching("**/lang/en_us.json") { // Defaults description to English translation
-        expand(props)
-        filteringCharset = "UTF-8"
-    }
-
-    if (loader.isFabric) {
-        filesMatching("fabric.mod.json") { expand(props) }
-        exclude(listOf("META-INF/neoforge.mods.toml"))
-    }
-
-    if (loader.isNeoForge) {
-        filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
-        exclude(listOf("fabric.mod.json"))
+    // Builds the version into a shared folder in `build/libs/${mod version}/`
+    register<Copy>("buildAndCollect") {
+        group = "build"
+        from(remapJar.map { it.archiveFile }, remapSourcesJar.map { it.archiveFile })
+        into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+        dependsOn("build")
     }
 }
 
