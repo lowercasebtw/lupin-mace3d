@@ -30,8 +30,8 @@ class Dependencies {
     val fabricLoaderVersion = property("deps.fabric_loader_version").toString()
     val fabricApiVersion = property("deps.fabric_api_version").toString()
 
-    val mixinconstraintsVersion = property("deps.mixinconstraints_version").toString()
-    val mixinsquaredVersion = property("deps.mixinsquared_version").toString()
+    val mixinConstraintsVersion = property("deps.mixinconstraints_version").toString()
+    val mixinSquaredVersion = property("deps.mixinsquared_version").toString()
 }
 
 class LoaderData {
@@ -47,6 +47,18 @@ val loader = LoaderData()
 group = mod.group
 base {
     archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}+${loader.loader}")
+}
+
+java {
+    val requiredJava = when {
+        stonecutter.eval(stonecutter.current.version, ">=1.20.6") -> JavaVersion.VERSION_21
+        stonecutter.eval(stonecutter.current.version, ">=1.18") -> JavaVersion.VERSION_17
+        stonecutter.eval(stonecutter.current.version, ">=1.17") -> JavaVersion.VERSION_16
+        else -> JavaVersion.VERSION_1_8
+    }
+
+    sourceCompatibility = requiredJava
+    targetCompatibility = requiredJava
 }
 
 stonecutter {
@@ -115,19 +127,14 @@ dependencies {
         }
     })
 
-    include(implementation("com.moulberry:mixinconstraints:${deps.mixinconstraintsVersion}")!!)!!
-    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-${loader.loader}:${deps.mixinsquaredVersion}")!!)!!)
+    include(implementation("com.moulberry:mixinconstraints:${deps.mixinConstraintsVersion}")!!)!!
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-${loader.loader}:${deps.mixinSquaredVersion}")!!)!!)
     if (loader.isFabric) {
         modImplementation("net.fabricmc:fabric-loader:${deps.fabricLoaderVersion}")
-        modImplementation(fabricApi.module("fabric-resource-loader-v0", deps.fabricApiVersion)) // NOTE: Required for the /resources/assets/ files to be laoded by the game
+        modImplementation(fabricApi.module("fabric-resource-loader-v0", deps.fabricApiVersion)) // NOTE: Required for the /resources/assets/ files to be loaded by the game
     } else if (loader.isNeoForge) {
         "neoForge"("net.neoforged:neoforge:${deps.neoForgeVersion}")
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks {
