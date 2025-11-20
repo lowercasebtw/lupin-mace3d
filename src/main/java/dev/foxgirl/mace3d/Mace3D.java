@@ -9,10 +9,10 @@ import net.neoforged.fml.common.Mod;
 
 //? <=1.21.3 {
 /*import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.world.item.Items;
 *///?}
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 
 //? neoforge
 @Mod(Mace3D.MOD_ID)
@@ -25,11 +25,11 @@ public final class Mace3D
     public static final String MOD_ID = "@MODID@";
 
     public static final MaceModel MODEL = new MaceModel(
-        Items.MACE,
         //? >= 1.21.4 {
         location("mace")
         //?} else {
-        /*new ModelResourceLocation(ResourceLocation.withDefaultNamespace("mace"), "inventory"),
+        /*Items.MACE,
+        new ModelResourceLocation(ResourceLocation.withDefaultNamespace("mace"), "inventory"),
         new ModelResourceLocation(location("mace_in_hand"), "inventory")
         *///?}
     );
