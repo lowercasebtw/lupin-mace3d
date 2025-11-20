@@ -44,7 +44,6 @@ val mod = ModData()
 val deps = Dependencies()
 val loader = LoaderData()
 
-version = mod.version
 group = mod.group
 base {
     archivesName.set("${mod.id}-${mod.version}-${mod.mcVersion}+${loader.loader}")
@@ -112,8 +111,7 @@ dependencies {
         officialMojangMappings()
         // Parchment mappings (it adds parameter mappings & javadoc)
         optionalProp("deps.parchment_version") {
-            var snapshot = !mod.mcVersion.toString().contains(".")
-            parchment("org.parchmentmc.data:parchment-${if (snapshot) "1.21.10" else mod.mcVersion}:$it@zip")
+            parchment("org.parchmentmc.data:parchment-${mod.mcVersion}:$it@zip")
         }
     })
 
