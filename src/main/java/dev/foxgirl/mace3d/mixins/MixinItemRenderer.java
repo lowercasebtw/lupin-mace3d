@@ -1,41 +1,45 @@
 package dev.foxgirl.mace3d.mixins;
 
-import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import org.spongepowered.asm.mixin.Mixin;
+
+//? <=1.21.3 {
+/*import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.foxgirl.mace3d.Mace3D;
 import dev.foxgirl.mace3d.MaceModel;
 import net.minecraft.client.renderer.ItemModelShaper;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+*///?}
 
 @Mixin(ItemRenderer.class)
 public abstract class MixinItemRenderer {
-    @Shadow
+    //? <=1.21.3 {
+    /*@Shadow
     @Final
     //? >=1.21.2 {
     private ModelManager modelManager;
     //?} else {
-    /*private ItemModelShaper itemModelShaper;
-    *///?}
+    *//*private ItemModelShaper itemModelShaper;
+     *//*//?}
 
     @Unique
     private BakedModel mace3d$getBakedModelByResourceLocation(ModelResourceLocation modelResourceLocation) {
         //? >=1.21.2 {
         return this.modelManager.getModel(modelResourceLocation);
         //?} else {
-        /*return itemModelShaper.getModelManager().getModel(modelResourceLocation);
-        *///?}
+        *//*return itemModelShaper.getModelManager().getModel(modelResourceLocation);
+     *//*//?}
     }
 
     @Unique
@@ -51,8 +55,8 @@ public abstract class MixinItemRenderer {
         //? >=1.21.2 {
         method = "renderSimpleItemModel",
         //?} else {
-        /*method = "render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
-        *///?}
+        *//*method = "render(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/resources/model/BakedModel;)V",
+     *//*//?}
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z",
@@ -74,4 +78,5 @@ public abstract class MixinItemRenderer {
             modelRef.set(model);
         }
     }
+    *///?}
 }

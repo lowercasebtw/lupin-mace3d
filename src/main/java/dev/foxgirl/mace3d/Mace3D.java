@@ -5,9 +5,12 @@ package dev.foxgirl.mace3d;
 import net.fabricmc.api.ClientModInitializer;
 *///?} else neoforge {
 import net.neoforged.fml.common.Mod;
-//?}
+ //?}
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
+//? <=1.21.3 {
+/*import net.minecraft.client.resources.model.ModelResourceLocation;
+*///?}
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
@@ -20,10 +23,15 @@ public final class Mace3D
     /*implements ClientModInitializer*/
 {
     public static final String MOD_ID = "@MODID@";
+
     public static final MaceModel MODEL = new MaceModel(
         Items.MACE,
-        ModelResourceLocation.inventory(ResourceLocation.withDefaultNamespace("mace")),
-        ModelResourceLocation.inventory(location("mace_in_hand"))
+        //? >= 1.21.4 {
+        location("mace")
+        //?} else {
+        /*new ModelResourceLocation(ResourceLocation.withDefaultNamespace("mace"), "inventory"),
+        new ModelResourceLocation(location("mace_in_hand"), "inventory")
+        *///?}
     );
 
     public static ResourceLocation location(String path) {
