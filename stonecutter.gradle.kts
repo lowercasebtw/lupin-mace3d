@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.publishing)
 }
 
-stonecutter active "1.21.5-neoforge" /* [SC] DO NOT EDIT */
+stonecutter active "1.21.8-neoforge" /* [SC] DO NOT EDIT */
 
 stonecutter tasks {
     order("publishMods", versionComparator)
