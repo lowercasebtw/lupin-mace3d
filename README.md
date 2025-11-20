@@ -1,9 +1,9 @@
 ![](https://dl.vixen.link/8xppgd/BH_A3D_header.webp)
-# Awesome 3D Mace (Architectury)
+# Awesome 3D Mace (Stonecutter)
 Source code repository for the Awesome 3D Mace mod for Minecraft.
 Find downloads on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/awesome-3d-mace) and [Modrinth](https://modrinth.com/mod/awesome-3d-mace).
 
-This repository contains the Architectury version of this project, for Fabric and NeoForge.
+This repository contains the Stonecutter version of this project, for Fabric, Forge and NeoForge.
 To find the legacy Forge version, see here: https://github.com/luavixen/lupin-mace3d-forge
 
 # Description

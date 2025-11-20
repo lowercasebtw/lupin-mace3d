@@ -1,0 +1,49 @@
+{
+    "schemaVersion": 1,
+    "id": "${id}",
+    "version": "${version}",
+    "name": "${name}",
+    "description": "${description}",
+    "icon": "assets/${id}/icon.png",
+    "license": "${license}",
+    "authors": [
+        {
+            "name": "luavixen",
+            "contact": {
+                "email": "lua@foxgirl.dev",
+                "website": "https://foxgirl.dev/"
+            }
+        },
+        {
+            "name": "Lupin",
+            "contact": {
+                "website": "https://www.youtube.com/@LupinYT"
+            }
+        },
+        {
+            "name": "lowercasebtw",
+            "contact": {
+                "website": "https://discord.gg/zqnXSUqedW"
+            }
+        }
+    ],
+    "contact": {
+        "sources": "${source}",
+        "issues": "${issues}"
+    },
+    "environment": "client",
+    "depends": {
+        "minecraft": "${minecraft_version_range}",
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-resource-loader-v0": "*"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.modrinth": "${modrinth}",
+                "modmenu.curseforge": "${curseforge}"
+            },
+            "update_checker": true
+        }
+    }
+}
